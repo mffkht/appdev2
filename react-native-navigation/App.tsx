@@ -18,7 +18,7 @@ function DetailsScreen() {
     </View>
   );
 }
-
+//Specifying
 const RootStack = createNativeStackNavigator({
   initialRouteName: 'Home',
   screens: {
