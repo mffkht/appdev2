@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, Text, Button } from 'react-native';
-import { createStaticNavigation } from '@react-navigation/native';
+import { createStaticNavigation, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 type RootStackParamList = {
@@ -9,9 +9,12 @@ type RootStackParamList = {
 };
 
 function HomeScreen({ navigation }: any) {
+// Did the "Using the navigation object"
+    
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
+      
 
       <Button
         title="Go to Details"
