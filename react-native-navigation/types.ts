@@ -9,3 +9,5 @@ export type MoreStackParamList = {
   };
   Profile: undefined;
 };
+
+//Seperated
