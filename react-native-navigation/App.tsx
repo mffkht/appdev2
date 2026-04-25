@@ -11,6 +11,7 @@ import { Button } from '@react-navigation/elements';
 import type { RootTabParamList, MoreStackParamList } from './types';
 
 /* -------------------- SCREENS -------------------- */
+//Imported and configured TypeScript in App file
 
 function SettingsScreen({ route }: any) {
   const { userId } = route.params;
