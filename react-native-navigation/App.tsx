@@ -1,101 +1,71 @@
 import * as React from 'react';
-import { View, Text, TextInput } from 'react-native';
+import { Text, View } from 'react-native';
 import {
   createStaticNavigation,
   useNavigation,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Button } from '@react-navigation/elements';
 
-type RootStackParamList = {
-  Home: {
-    post?: string;
-  };
-  CreatePost: undefined;
-};
-
-function HomeScreen({ route }: any) {
-  const navigation = useNavigation<any>();
-
-  // Monitor updates to params
-  React.useEffect(() => {
-    if (route.params?.post) {
-      alert('New post: ' + route.params.post);
-    }
-  }, [route.params?.post]);
+function SettingsScreen({ route }: any) {
+  const { userId } = route.params;
 
   return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      <Button onPress={() => navigation.navigate('CreatePost')}>
-        Create Post
-      </Button>
-
-      <Text style={{ margin: 10 }}>
-        Post: {route.params?.post}
-      </Text>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Settings Screen</Text>
+      <Text>User ID: {userId}</Text>
     </View>
   );
 }
 
-function CreatePostScreen() {
-  const navigation = useNavigation<any>();
-  const [postText, setPostText] = React.useState('');
-
+function ProfileScreen() {
   return (
-    <View
-      style={{
-        flex: 1,
-        padding: 20,
-        justifyContent: 'center',
-      }}
-    >
-      <TextInput
-        multiline
-        placeholder="What's on your mind?"
-        style={{
-          height: 200,
-          padding: 10,
-          backgroundColor: 'white',
-          borderWidth: 1,
-          marginBottom: 20,
-        }}
-        value={postText}
-        onChangeText={setPostText}
-      />
-
-      <Button
-        onPress={() => {
-          navigation.navigate('Home', {
-            post: postText,
-          });
-        }}
-      >
-        Done
-      </Button>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
     </View>
   );
 }
 
-const RootStack = createNativeStackNavigator({
-  initialRouteName: 'Home',
+// IMPORTANT: This is a STACK inside the tab
+const MoreStack = createNativeStackNavigator({
+  initialRouteName: 'Settings',
   screens: {
-    Home: {
-      screen: HomeScreen,
-      initialParams: {
-        post: '',
-      },
-    },
-    CreatePost: CreatePostScreen,
+    Settings: SettingsScreen,
+    Profile: ProfileScreen,
   },
 });
 
-const Navigation = createStaticNavigation(RootStack);
+function HomeScreen() {
+  const navigation = useNavigation<any>();
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+
+      <Button
+        onPress={() =>
+          navigation.navigate('More', {
+            screen: 'Settings',
+            params: { userId: 'jane' },
+          })
+        }
+      >
+        Go to Settings
+      </Button>
+    </View>
+  );
+}
+
+// TAB NAVIGATOR
+const RootTabs = createBottomTabNavigator({
+  screens: {
+    Home: HomeScreen,
+    More: MoreStack,
+  },
+});
+
+const Navigation = createStaticNavigation(RootTabs);
 
 export default function App() {
   return <Navigation />;
