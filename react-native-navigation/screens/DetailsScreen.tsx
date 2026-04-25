@@ -9,7 +9,9 @@ import { Button } from '@react-navigation/elements';
 
 type RootStackParamList = {
   Home: undefined;
-  Details: undefined;
+  Details: {
+    itemId: number;
+  };
 };
 
 function HomeScreen() {
@@ -25,15 +27,22 @@ function HomeScreen() {
     >
       <Text>Home Screen</Text>
 
-      <Button onPress={() => navigation.navigate('Details')}>
+      <Button
+        onPress={() =>
+          navigation.navigate('Details', {
+            itemId: 42,
+          })
+        }
+      >
         Go to Details
       </Button>
     </View>
   );
 }
 
-function DetailsScreen() {
+function DetailsScreen({ route }: any) {
   const navigation = useNavigation<any>();
+  const { itemId } = route.params;
 
   return (
     <View
@@ -44,9 +53,22 @@ function DetailsScreen() {
       }}
     >
       <Text>Details Screen</Text>
+      <Text>itemId: {itemId}</Text>
 
-      <Button onPress={() => navigation.push('Details')}>
+      <Button
+        onPress={() => navigation.push('Details', { itemId: 42 })}
+      >
         Go to Details... again
+      </Button>
+
+      <Button
+        onPress={() =>
+          navigation.setParams({
+            itemId: Math.floor(Math.random() * 100),
+          })
+        }
+      >
+        Update itemId
       </Button>
 
       <Button onPress={() => navigation.goBack()}>
@@ -68,7 +90,12 @@ const RootStack = createNativeStackNavigator({
   initialRouteName: 'Home',
   screens: {
     Home: HomeScreen,
-    Details: DetailsScreen,
+    Details: {
+      screen: DetailsScreen,
+      initialParams: {
+        itemId: 42,
+      },
+    },
   },
 });
 
