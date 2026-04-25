@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import { Ionicons } from "@expo/vector-icons";
 import {
   Alert,
   KeyboardAvoidingView,
@@ -132,3 +132,100 @@ const TodoScreen = () => {
 };
 
 export default TodoScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#7D7AFF",
+  },
+
+  header: {
+    paddingTop: 70,
+    paddingHorizontal: 30,
+    paddingBottom: 30,
+  },
+
+  title: {
+    fontSize: 32,
+    fontWeight: "bold",
+    color: "#FFFFFF",
+    marginBottom: 20,
+  },
+
+  searchContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#FFF",
+    borderRadius: 15,
+    paddingHorizontal: 15,
+  },
+
+  searchBar: {
+    flex: 1,
+    height: 50,
+    marginLeft: 10,
+  },
+
+  bodyContainer: {
+    flex: 1,
+    backgroundColor: "#FFF",
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+    paddingHorizontal: 30,
+    paddingTop: 40,
+  },
+
+  todoItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    backgroundColor: "#FFF",
+    padding: 15,
+    borderRadius: 20,
+    marginBottom: 15,
+    borderWidth: 1,
+    borderColor: "#F0F0F0",
+  },
+
+  textWrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+    flex: 1,
+  },
+
+  todoText: {
+    fontSize: 16,
+    color: "#333",
+    marginLeft: 12,
+  },
+
+  todoCompleted: {
+    textDecorationLine: "line-through",
+    color: "#AAA",
+  },
+
+  inputWrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingBottom: 30,
+    paddingTop: 10,
+  },
+
+  input: {
+    flex: 1,
+    height: 55,
+    backgroundColor: "#F5F5F5",
+    borderRadius: 15,
+    paddingHorizontal: 20,
+  },
+
+  addButton: {
+    backgroundColor: "#FFCC00",
+    borderRadius: 15,
+    width: 55,
+    height: 55,
+    alignItems: "center",
+    justifyContent: "center",
+    marginLeft: 15,
+  },
+});
